@@ -1,4 +1,4 @@
-package codigo;
+package src;
 
 public class main {
 }
