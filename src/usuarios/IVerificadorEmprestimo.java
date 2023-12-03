@@ -1,5 +1,6 @@
 package src.usuarios;
 
 public interface IVerificadorEmprestimo {
-    public Boolean verificadorEmprestimo();
+    
+    public boolean verificadorEmprestimo();
 }
