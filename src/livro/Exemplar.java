@@ -15,7 +15,7 @@ public class Exemplar {
     }
     
     public boolean disponivel() {
-        return this.emprestimo != null;
+        return this.emprestimo == null;
     }
 
     public void emprestar(Usuario usuario){
