@@ -19,7 +19,7 @@ public class Exemplar {
     }
 
     public void emprestar(Usuario usuario) throws Exception{
-        if (!usuario.getVerificadorEmprestimo().verificadorEmprestimo()){
+        if (!usuario.getVerificadorEmprestimo().verificadorEmprestimo(usuario, this.livro)){
             throw new Exception("O usuário não pode pegar livro emprestado!");
         }
 

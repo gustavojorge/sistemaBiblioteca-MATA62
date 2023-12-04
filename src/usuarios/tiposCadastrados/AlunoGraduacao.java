@@ -1,14 +1,16 @@
 package src.usuarios.tiposCadastrados;
 
 import src.usuarios.Usuario;
+import src.usuarios.verificadoresEmprestimo.regras.LimiteEmprestimos;
 import src.usuarios.verificadoresEmprestimo.regras.TempoEmprestimo;
 import src.usuarios.IVerificadorEmprestimo;
 
-public class Professor extends Usuario {
+public class AlunoGraduacao extends Usuario {
 
-    public Professor(int id, String nome, IVerificadorEmprestimo verificadorEmprestimo) {
+    public AlunoGraduacao(int id, String nome, IVerificadorEmprestimo verificadorEmprestimo) {
         super(id, nome, verificadorEmprestimo);
-        this.limiteTempoEmprestimo = TempoEmprestimo.PROFESSOR.getLimite();
+        this.limiteQuantidadeEmprestimo = LimiteEmprestimos.ALUNO_GRADUACAO.getLimite();
+        this.limiteTempoEmprestimo = TempoEmprestimo.ALUNO_GRADUACAO.getLimite();
     }
 
     @Override

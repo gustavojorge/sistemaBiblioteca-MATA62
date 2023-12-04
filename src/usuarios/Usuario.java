@@ -7,16 +7,16 @@ import src.livro.Reserva;
 public abstract class Usuario {
     protected int id;
     protected String nome;
-    protected int tempoMaxEmprestimo;
     protected IVerificadorEmprestimo verificadorEmprestimo;
     protected List<Emprestimo> emprestimosAtivos;
     protected List<Emprestimo> emprestimosPassados;
     protected List<Reserva> reservas;
+    protected int limiteQuantidadeEmprestimo;
+    protected int limiteTempoEmprestimo;
 
-    public Usuario(int id, String nome, int tempoMaxEmprestimo, IVerificadorEmprestimo verificadorEmprestimo) {
+    public Usuario(int id, String nome, IVerificadorEmprestimo verificadorEmprestimo) {
         this.id = id;
         this.nome = nome;
-        this.tempoMaxEmprestimo = tempoMaxEmprestimo;
         this.verificadorEmprestimo = verificadorEmprestimo;
     }
 
@@ -36,8 +36,12 @@ public abstract class Usuario {
         this.nome = nome;
     }
 
-    public int getTempoMaxEmprestimo() {
-        return this.tempoMaxEmprestimo;
+    public int getLimiteTempoEmprestimo() {
+        return this.limiteTempoEmprestimo;
+    }
+
+    public int getLimiteQuantidadeEmprestimos(){
+        return this.limiteQuantidadeEmprestimo;
     }
 
     public List<Emprestimo> getEmprestimosAtivos(){
@@ -50,6 +54,10 @@ public abstract class Usuario {
 
     public List<Reserva> getReservas(){
         return this.reservas;
+    }
+
+    public int getQuantidadeEmprestimosAtivos(){
+        return this.emprestimosAtivos.size();
     }
 
     public void adicionarEmprestimo(Emprestimo emprestimo){

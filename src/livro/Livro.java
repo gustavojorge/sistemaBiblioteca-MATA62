@@ -82,7 +82,27 @@ public class Livro {
         this.edicao = edicao;
     }*/
 
-    public Exemplar obterExemplarLivre(Usuario usuario) throws Exception{
+    public List<Reserva> getReservas(){
+        return this.reservas;
+    }
+
+    public int getQuantidadeReservas(){
+        return this.reservas.size();
+    }
+
+    public int getQuantidadeExemplaresLivres(){
+        int exemplaresLivres = 0;
+
+        for (Exemplar exemplar: this.exemplares){
+            if (exemplar.disponivel()){
+                exemplaresLivres++;
+            }
+        }
+
+        return exemplaresLivres;
+    }
+    
+    /*public Exemplar obterExemplarLivre(Usuario usuario) throws Exception{
         Exemplar exemplarLivre = null;
         int exemplaresLivres = 0;
         boolean usuarioReservado = false;
@@ -110,7 +130,7 @@ public class Livro {
             throw new Exception("Todos os exemplares livres já foram reservados para outros usuários!");
 
         return exemplarLivre;
-    }
+    }*/
 
     public void adicionarReserva(Usuario usuario) throws Exception{
         for (Reserva reserva: this.reservas){

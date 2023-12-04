@@ -1,17 +1,17 @@
 package src.livro;
 
-import java.util.Date;
+import java.time.LocalDate;
 import src.usuarios.Usuario;
 
 public class Emprestimo {
-    private Date dataEmprestimo;
+    private LocalDate dataEmprestimo;
     private Exemplar exemplar;
     private Usuario usuario;
     
     Emprestimo(Exemplar exemplar, Usuario usuario){
         this.exemplar = exemplar;
         this.usuario = usuario;
-        this.dataEmprestimo = new Date();
+        this.dataEmprestimo = LocalDate.now();
     }
     
     public Exemplar getExemplar() {
@@ -22,7 +22,7 @@ public class Emprestimo {
         return usuario;
     }
 
-    public Date getDataEmprestimo(){
+    public LocalDate getDataEmprestimo(){
         return this.dataEmprestimo;
     }
 }
