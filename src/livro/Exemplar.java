@@ -18,16 +18,12 @@ public class Exemplar {
         return this.emprestimo != null;
     }
 
-    public void emprestar(Usuario usuario) throws Exception{
+    public void emprestar(Usuario usuario){
         if (!usuario.getVerificadorEmprestimo().verificadorEmprestimo(usuario, this.livro)){
-            throw new Exception("O usuário não pode pegar livro emprestado!");
+            return;
         }
 
-        try {
-            this.livro.removerReserva(usuario);
-        } catch (Exception e) {
-            // Nada faz...
-        }
+        this.livro.removerReserva(usuario);
 
         Emprestimo emprestimo = new Emprestimo(this, usuario);
         this.emprestimo = emprestimo;

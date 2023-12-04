@@ -4,20 +4,15 @@ import src.livro.Livro;
 import src.livro.Reserva;
 import src.usuarios.Usuario;
 
+// Verifica se o usuário possui reserva do livro
 public class VerificadorReservas {
     public static boolean usuarioEValido(Usuario usuario, Livro livro){
-        boolean usuarioReservado = false;
-
         for (Reserva reserva: livro.getReservas()){
             if (reserva.getUsuario().getId() == usuario.getId()){
-                usuarioReservado = true;
-                break;
+                return true;
             }
         }
-
-        if (livro.getQuantidadeReservas() >= livro.getQuantidadeExemplaresLivres() && !usuarioReservado)
-            return false;
         
-        return true;
+        return false;
     }
 }

@@ -101,36 +101,16 @@ public class Livro {
 
         return exemplaresLivres;
     }
-    
-    /*public Exemplar obterExemplarLivre(Usuario usuario) throws Exception{
-        Exemplar exemplarLivre = null;
-        int exemplaresLivres = 0;
-        boolean usuarioReservado = false;
 
+    public Exemplar obterExemplarLivre() throws Exception{
         for (Exemplar exemplar: this.exemplares){
             if (exemplar.disponivel()){
-                if (exemplarLivre == null){
-                    exemplarLivre = exemplar;
-                }
-                exemplaresLivres++;
+                return exemplar;
             }
         }
 
-        for (Reserva reserva: this.reservas){
-            if (reserva.getUsuario().getId() == usuario.getId()){
-                usuarioReservado = true;
-                break;
-            }
-        }
-        
-        if (exemplarLivre == null)
-            throw new Exception("Todos os exemplares já foram emprestados!");
-        
-        if (exemplaresLivres <= this.reservas.size() && !usuarioReservado)
-            throw new Exception("Todos os exemplares livres já foram reservados para outros usuários!");
-
-        return exemplarLivre;
-    }*/
+        throw new Exception("Não há exemplares deste livro livres!");
+    }
 
     public void adicionarReserva(Usuario usuario) throws Exception{
         for (Reserva reserva: this.reservas){
@@ -144,7 +124,7 @@ public class Livro {
         reservas.add(reserva);
     }
 
-    public void removerReserva(Usuario usuario) throws Exception{
+    public void removerReserva(Usuario usuario){
         for (Reserva reserva: this.reservas){
             if (reserva.getUsuario().getId() == usuario.getId()){
                 usuario.removerReserva(reserva);
@@ -152,7 +132,5 @@ public class Livro {
                 return;
             }
         }
-
-        throw new Exception("Usuário não reservou este livro!");
     }
 }
