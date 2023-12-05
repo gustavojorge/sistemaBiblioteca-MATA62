@@ -1,16 +1,21 @@
 package src.utils;
 
+import java.util.Scanner;
 import src.utils.entradaUsuario.CarregadorArgs;
 
 public class Console {
-    //Instânciando exemplos na memória -> simulando um banco de dados
-    BancoDeDados bancoDeDados = BancoDeDados.obterInstanciaBancoDeDados();
+    private ExecutarSistema sistema = new ExecutarSistema();
 
-    //Carregando os argumentos a partir da entrada do usuário
-    //CarregadorArgs entradaProcessada = new CarregadorArgs(entradaUsuario);
+    public void executar(){
+        Scanner entrada = new Scanner(System.in);
+        CarregadorArgs argumentos;
 
-    //Executando a solicitacao do usuario
-    //ExecutarSistema executar = new ExecutarSistema(entradaProcessada);
+        while (true){
+            imprimirMensagem("> ", false);
+            argumentos = new CarregadorArgs(entrada.nextLine());
+            sistema.executarComando(argumentos);
+        }
+    }
 
     public static void imprimirMensagem(String msg){
         System.out.println(msg);

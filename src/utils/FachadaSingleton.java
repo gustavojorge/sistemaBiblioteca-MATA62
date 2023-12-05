@@ -27,6 +27,7 @@ public class FachadaSingleton {
         if (usuario.getVerificadorEmprestimo().verificadorEmprestimo(usuario, livro)){
             try{
                 livro.obterExemplarLivre().emprestar(usuario);
+                Console.imprimirMensagem("Livro emprestado com sucesso!\n");
             } catch (Exception e){
                 // Esse bloco nunca será executado, pois verificadorEmprestimo retorna false se não há exemplares livres
             }
@@ -39,6 +40,7 @@ public class FachadaSingleton {
 
         try{
             livro.adicionarReserva(usuario);
+            Console.imprimirMensagem("Reserva feita com sucesso!\n");
         } catch (Exception e){
             Console.imprimirMensagem("Não foi possível fazer a reserva pelo seguinte motivo: "+e.getMessage());
         }
@@ -99,6 +101,7 @@ public class FachadaSingleton {
 
         try{
             usuario.obterEmprestimo(livro).getExemplar().devolver();
+            Console.imprimirMensagem("Livro devolvido com sucesso!\n");
         } catch (Exception e){
             Console.imprimirMensagem(e.getMessage());
         }

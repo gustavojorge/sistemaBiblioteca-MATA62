@@ -10,5 +10,5 @@ public class Fabrica {
     public static IComando obterConsultarUsuarioComando(){return new ConsultarLivroComando();}
     public static IComando obterDevolverLivroComando(){return new DevolverLivroComando();}
     public static IComando obterObservadorComando(){return new ObservadorComando();}
-    public static IComando exit(){return new ExitComando();}
+    public static IComando sair(){return new ExitComando();}
 }

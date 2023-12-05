@@ -8,7 +8,7 @@ public enum CodigosComandosEnum {
     CONSULTARUSUARIO_CODIGO("usu"),
     DEVOLVERLIVRO_CODIGO("dev"),
     OBSERVADOR_CODIGO("obs"),
-    EXIT_CODIGO("sai");
+    SAIDA_CODIGO("sai");
 
     private final String codigo;
 
