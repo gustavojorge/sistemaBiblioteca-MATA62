@@ -88,7 +88,7 @@ public class Livro implements Subject {
             }
         }
 
-        throw new Exception("Não há exemplares deste livro livres!");
+        throw new Exception("Não há exemplares livres deste livro!");
     }
 
     public void adicionarReserva(Usuario usuario) throws Exception{

@@ -1,6 +1,8 @@
 package src.utils;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Arrays;
 
 import src.livro.Livro;
 import src.usuarios.Usuario;
@@ -27,8 +29,25 @@ public class BancoDeDados {
         usuarios.put(100, new Professor(100, "Carlos Lucena", new VerificadorProfessor()));
         
         //Livros
-        //Livro livro1 = new Livro("100", "Engenharia de Software", "AddisonWesley", "Ian Sommervile", 2000, 6);
-        
+        livros.put(100, new Livro(100, "Engenharia de Software", "AddisonWesley", arrayAutores("Ian Sommervile"), 2000, 6));
+        livros.put(101, new Livro(101, "UML – Guia do Usuário", "Campus", arrayAutores("Grady Booch", "James Rumbaugh", "Ivar Jacobson"), 2000, 7));
+        livros.put(200, new Livro(200, "Code Complete", "Microsoft Press", arrayAutores("Steve McConnell"), 2014, 2));
+        livros.put(201, new Livro(201, "Agile Software Development, Principles, Patterns, and Practices", "Prentice Hall", arrayAutores("Robert Martin"), 2002, 1));
+        livros.put(300, new Livro(300, "Refactoring: Improving the Design of Existing Code", "Addison-Wesley Professional", arrayAutores("Martin Fowler"), 1999, 1));
+        livros.put(301, new Livro(301, "Software Metrics: A Rigorous and Practical Approach", "CRC Press", arrayAutores("Norman Fenton", "James Bieman"), 2014, 3));
+        livros.put(400, new Livro(400, "Design Patterns: Elements of Reusable Object-Oriented Software", "Addison-Wesley Professional", arrayAutores("Erich Gamma", "Richard Helm", "Ralph Johnson", "John Vlissides"), 1994, 1));
+        livros.put(401, new Livro(401, "UML Distilled: A Brief Guide to the Standard Object Modeling Language", "Addison-Wesley Professional", arrayAutores("Martin Fowler"), 2003, 3));
+
+        //Exemplares
+        int exemplares[] = {100, 100, 101, 200, 201, 300, 300, 400, 400}, id_=1;
+        for (int i: exemplares){
+            livros.get(i).adicionarExemplar(id_);
+            id_++;
+        }
+    }
+    
+    private List<String> arrayAutores(String ... autores){
+        return Arrays.asList(autores);
     }
     
     public static BancoDeDados obterInstanciaBancoDeDados(){
