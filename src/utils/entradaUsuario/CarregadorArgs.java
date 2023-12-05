@@ -1,9 +1,9 @@
 package src.utils.entradaUsuario;
 
 public class CarregadorArgs {
-    public String argumento1; //codigo
-    public String argumento2;
-    public String argumento3;
+    private String argumento1; //codigo
+    private String argumento2;
+    private String argumento3;
 
     public CarregadorArgs(String entrada){
         TratamentoEntrada tratamentoEntrada = new TratamentoEntrada(entrada);

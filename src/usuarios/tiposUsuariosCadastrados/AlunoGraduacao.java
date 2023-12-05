@@ -1,4 +1,4 @@
-package src.usuarios.usuariosCadastrados;
+package src.usuarios.tiposUsuariosCadastrados;
 
 import src.usuarios.Usuario;
 import src.usuarios.verificadoresEmprestimo.regras.LimiteEmprestimos;
