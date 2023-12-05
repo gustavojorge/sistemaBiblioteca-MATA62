@@ -3,10 +3,11 @@ package src.usuarios.tiposUsuariosCadastrados;
 import src.observer.Observer;
 import src.usuarios.Usuario;
 import src.usuarios.verificadoresEmprestimo.regras.TempoEmprestimo;
+import src.usuarios.IEmprestimosTempoLimitado;
 import src.usuarios.IVerificadorEmprestimo;
 
-public class Professor extends Usuario implements Observer {
-
+public class Professor extends Usuario implements Observer, IEmprestimosTempoLimitado {
+    private int limiteTempoEmprestimo;
     private int contadorNotificacoes = 0;
 
     public Professor(int id, String nome, IVerificadorEmprestimo verificadorEmprestimo) {
@@ -14,13 +15,15 @@ public class Professor extends Usuario implements Observer {
         this.limiteTempoEmprestimo = TempoEmprestimo.PROFESSOR.getLimite();
     }
 
-    @Override
     public void setVerificadorEmprestimo(IVerificadorEmprestimo verificadorEmprestimo) {
         super.verificadorEmprestimo = verificadorEmprestimo;
     }
 
-    @Override
     public void update() {
         contadorNotificacoes++;
+    }
+
+    public int getLimiteTempoEmprestimo() {
+        return this.limiteTempoEmprestimo;
     }
 }

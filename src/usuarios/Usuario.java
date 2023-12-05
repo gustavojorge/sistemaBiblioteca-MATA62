@@ -11,8 +11,6 @@ public abstract class Usuario {
     protected List<Emprestimo> emprestimosAtivos;
     protected List<Emprestimo> emprestimosPassados;
     protected List<Reserva> reservas;
-    protected int limiteQuantidadeEmprestimo;
-    protected int limiteTempoEmprestimo;
 
     public Usuario(int id, String nome, IVerificadorEmprestimo verificadorEmprestimo) {
         this.id = id;
@@ -34,14 +32,6 @@ public abstract class Usuario {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public int getLimiteTempoEmprestimo() {
-        return this.limiteTempoEmprestimo;
-    }
-
-    public int getLimiteQuantidadeEmprestimos(){
-        return this.limiteQuantidadeEmprestimo;
     }
 
     public List<Emprestimo> getEmprestimosAtivos(){
