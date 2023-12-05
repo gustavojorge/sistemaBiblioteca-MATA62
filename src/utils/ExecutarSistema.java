@@ -1,16 +1,18 @@
-package src;
+package src.utils;
 
 import src.comandos.*;
 import src.comandos.CodigosComandosEnum;
-import src.utils.CarregadorArgs;
+import src.utils.entradaUsuario.CarregadorArgs;
 
 import java.util.HashMap;
 
-public class entradaDados {
+public class ExecutarSistema {
+    //Classe "entrada" do exemplo dado em sala
     private HashMap<String, IComando> comandos;
 
-    public entradaDados(){
+    public ExecutarSistema(CarregadorArgs args){
         initComandos();
+        executarComandos(args.getArgumento1(), args);
     }
 
     private void initComandos(){

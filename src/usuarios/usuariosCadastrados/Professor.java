@@ -1,4 +1,4 @@
-package src.usuarios.tiposCadastrados;
+package src.usuarios.usuariosCadastrados;
 
 import src.observer.Observer;
 import src.usuarios.Usuario;

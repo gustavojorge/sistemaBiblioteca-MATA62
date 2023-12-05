@@ -1,4 +1,4 @@
-package src.utils;
+package src.utils.entradaUsuario;
 
 public class TratamentoEntrada {
 

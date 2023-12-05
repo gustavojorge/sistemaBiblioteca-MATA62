@@ -1,8 +1,8 @@
 package src.comandos.comandosCadastrados;
 
-import src.FachadaSingleton;
+import src.utils.FachadaSingleton;
 import src.comandos.IComando;
-import src.utils.CarregadorArgs;
+import src.utils.entradaUsuario.CarregadorArgs;
 
 public class ObservadorComando implements IComando {
     @Override

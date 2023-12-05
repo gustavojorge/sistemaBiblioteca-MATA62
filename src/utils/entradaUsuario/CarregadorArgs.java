@@ -1,6 +1,4 @@
-package src.utils;
-
-import javax.swing.text.Caret;
+package src.utils.entradaUsuario;
 
 public class CarregadorArgs {
     public String argumento1; //codigo

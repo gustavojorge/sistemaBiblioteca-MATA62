@@ -1,4 +1,4 @@
-package src;
+package src.utils;
 
 public class FachadaSingleton {
     private static FachadaSingleton instancia;
