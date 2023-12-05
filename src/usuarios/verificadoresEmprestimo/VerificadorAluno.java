@@ -24,7 +24,7 @@ public class VerificadorAluno implements IVerificadorEmprestimo {
             return false;
         }
 
-        if (VerificadorEmprestimoAtivoLivro.usuarioEValido(usuario, livro)){
+        if (!VerificadorEmprestimoAtivoLivro.usuarioEValido(usuario, livro)){
             return false;
         }
 
