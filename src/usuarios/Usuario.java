@@ -2,6 +2,7 @@ package src.usuarios;
 
 import java.util.List;
 import src.livro.Emprestimo;
+import src.livro.Livro;
 import src.livro.Reserva;
 
 public abstract class Usuario {
@@ -9,8 +10,9 @@ public abstract class Usuario {
     protected String nome;
     protected IVerificadorEmprestimo verificadorEmprestimo;
     protected List<Emprestimo> emprestimosAtivos;
-    protected List<Emprestimo> emprestimosPassados;
+    protected List<Emprestimo> emprestimosHistorico;
     protected List<Reserva> reservas;
+    protected int limiteTempoEmprestimo;
 
     public Usuario(int id, String nome, IVerificadorEmprestimo verificadorEmprestimo) {
         this.id = id;
@@ -21,10 +23,6 @@ public abstract class Usuario {
     public int getId() {
         return this.id;
     }
-
-    /*public void setId(int identificacao) {
-        this.id = identificacao;
-    }*/
 
     public String getNome() {
         return this.nome;
@@ -38,25 +36,47 @@ public abstract class Usuario {
         return this.emprestimosAtivos;
     }
 
-    public List<Emprestimo> getEmprestimosPassados(){
-        return this.emprestimosPassados;
+    public List<Emprestimo> getEmprestimosHistorico(){
+        return this.emprestimosHistorico;
     }
 
     public List<Reserva> getReservas(){
         return this.reservas;
     }
 
+    public Emprestimo obterEmprestimo(Livro livro) throws Exception{
+        for (Emprestimo emprestimo: emprestimosAtivos){
+            if (emprestimo.getExemplar().getLivro() == livro){
+                return emprestimo;
+            }
+        }
+
+        throw new Exception("O usuário não possui empréstimo desse livro!");
+    }
+
     public int getQuantidadeEmprestimosAtivos(){
         return this.emprestimosAtivos.size();
     }
 
+    public int getQuantidadeEmprestimosHistorico(){
+        return this.emprestimosHistorico.size();
+    }
+
+    public int getQuantidadeReservas(){
+        return this.reservas.size();
+    }
+
+    public int getLimiteTempoEmprestimo() {
+        return this.limiteTempoEmprestimo;
+    }
+
     public void adicionarEmprestimo(Emprestimo emprestimo){
         this.emprestimosAtivos.add(emprestimo);
+        this.emprestimosHistorico.add(emprestimo);
     }
 
     public void removerEmprestimo(Emprestimo emprestimo){
         this.emprestimosAtivos.remove(emprestimo);
-        this.emprestimosPassados.add(emprestimo);
     }
 
     public void adicionarReserva(Reserva reserva) throws Exception{

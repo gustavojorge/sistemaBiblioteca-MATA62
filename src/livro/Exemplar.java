@@ -1,5 +1,7 @@
 package src.livro;
 
+import java.time.LocalDate;
+
 import src.usuarios.Usuario;
 
 public class Exemplar {
@@ -19,10 +21,6 @@ public class Exemplar {
     }
 
     public void emprestar(Usuario usuario){
-        if (!usuario.getVerificadorEmprestimo().verificadorEmprestimo(usuario, this.livro)){
-            return;
-        }
-
         this.livro.removerReserva(usuario);
 
         Emprestimo emprestimo = new Emprestimo(this, usuario);
@@ -30,8 +28,10 @@ public class Exemplar {
         usuario.adicionarEmprestimo(emprestimo);
     }
 
-    public void cancelarEmprestimo(){
+    public void devolver(){
         this.emprestimo.getUsuario().removerEmprestimo(emprestimo);
+        this.emprestimo.setDataDevolucao(LocalDate.now());
+        this.emprestimo.setDevolvido(true);
         this.emprestimo = null;
     }
 }

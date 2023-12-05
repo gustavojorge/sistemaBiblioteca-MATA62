@@ -1,7 +1,6 @@
 package src.utils;
 
 import src.comandos.*;
-import src.comandos.CodigosComandosEnum;
 import src.utils.entradaUsuario.CarregadorArgs;
 
 import java.util.HashMap;
@@ -11,11 +10,6 @@ public class ExecutarSistema {
     private HashMap<String, IComando> comandos;
 
     public ExecutarSistema(CarregadorArgs args){
-        initComandos();
-        executarComandos(args.getArgumento1(), args);
-    }
-
-    private void initComandos(){
         comandos.put(CodigosComandosEnum.EMPRESTIMO_CODIGO.getCodigo(), Fabrica.obterFazerEmprestimoComando());
         comandos.put(CodigosComandosEnum.RESERVA_CODIGO.getCodigo(), Fabrica.obterFazerRevervaComando());
         comandos.put(CodigosComandosEnum.CONSULTARLIVRO_CODIGO.getCodigo(), Fabrica.obterConsultarLivroComando());
@@ -26,7 +20,8 @@ public class ExecutarSistema {
 
         //sair do programa
         comandos.put(CodigosComandosEnum.EXIT_CODIGO.getCodigo(), Fabrica.exit());
-    }
+        executarComandos(args.getArgumento1(), args);
+    }   
 
     private void executarComandos(String cmd, CarregadorArgs args){
         comandos.get(cmd).executar(args);

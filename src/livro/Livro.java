@@ -3,8 +3,8 @@ package src.livro;
 import java.util.ArrayList;
 import java.util.List;
 
-import src.observer.Observer;
-import src.observer.Subject;
+import src.observador.Observador;
+import src.observador.Subject;
 import src.usuarios.Usuario;
 
 public class Livro implements Subject {
@@ -17,7 +17,7 @@ public class Livro implements Subject {
     private int anoPublicacao;
     private int edicao;
 
-    private ArrayList<Observer> observers;
+    private ArrayList<Observador> observers;
 
     public Livro(String id, String titulo, String editora, List<String> autores, int anoPublicacao, int edicao) {
         this.id = id;
@@ -26,7 +26,7 @@ public class Livro implements Subject {
         this.autores = autores;
         this.anoPublicacao = anoPublicacao;
         this.edicao = edicao;
-        this.observers = new ArrayList<Observer>();
+        this.observers = new ArrayList<Observador>();
     }
 
     public String getId() {
@@ -41,53 +41,21 @@ public class Livro implements Subject {
         return titulo;
     }
 
-    /*public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }*/
-
     public String getEditora() {
         return editora;
     }
-
-    /*public void setEditora(String editora) {
-        this.editora = editora;
-    }*/
 
     public List<String> getAutores() {
         return autores;
     }
 
-    /*public void setAutores(List<String> autores) {
-        this.autores = autores;
-    }*/
-
-    /*public List<Exemplar> getExemplares() {
-        return exemplares;
-    }
-
-    public void setExemplares(List<Exemplar> exemplares) {
-        this.exemplares = exemplares;
-    }*/
-
     public int getAnoPublicacao() {
         return anoPublicacao;
     }
 
-    /*public void adicionarAutor(String autor) {
-        this.autores.add(autor);
-    }*/
-
-    /*public void setAnoPublicacao(int anoPublicacao) {
-        this.anoPublicacao = anoPublicacao;
-    }*/
-
     public int getEdicao() {
         return edicao;
     }
-
-    /*public void setEdicao(int edicao) {
-        this.edicao = edicao;
-    }*/
 
     public List<Reserva> getReservas(){
         return this.reservas;
@@ -126,11 +94,13 @@ public class Livro implements Subject {
             }
         }
 
-        if (reservas.size() >= 2) notifyObservers();
-
+        
         Reserva reserva = new Reserva(this, usuario);
         usuario.adicionarReserva(reserva);
         reservas.add(reserva);
+
+        if (reservas.size() >= 2)
+            notificarObservadores();
     }
 
     public void removerReserva(Usuario usuario){
@@ -145,23 +115,17 @@ public class Livro implements Subject {
 
     //Padrão observer: livro como subject
 
-    @Override
-    public void registerObserver(Observer o) {
-        observers.add(o);
+    public void RegistrarObservador(Observador observador) {
+        observers.add(observador);
     }
 
-    @Override
-    public void removeObserver(Observer o) {
-        int i = observers.indexOf(o);
-        if (i >= 0) {
-            observers.remove(i);
-        }
+    public void removerObservador(Observador observador) {
+        observers.remove(observador);
     }
 
-    @Override
-    public void notifyObservers() {
-        for (Observer observer : observers) {
-            observer.update();
+    public void notificarObservadores() {
+        for (Observador observer: observers) {
+            observer.atualizar();
         }
     }
 }
