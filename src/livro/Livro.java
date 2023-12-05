@@ -1,9 +1,13 @@
 package src.livro;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import src.observer.Observer;
+import src.observer.Subject;
 import src.usuarios.Usuario;
 
-public class Livro {
+public class Livro implements Subject {
     private String id;
     private String titulo;
     private String editora;
@@ -13,6 +17,8 @@ public class Livro {
     private int anoPublicacao;
     private int edicao;
 
+    private ArrayList<Observer> observers;
+
     public Livro(String id, String titulo, String editora, List<String> autores, int anoPublicacao, int edicao) {
         this.id = id;
         this.titulo = titulo;
@@ -20,6 +26,7 @@ public class Livro {
         this.autores = autores;
         this.anoPublicacao = anoPublicacao;
         this.edicao = edicao;
+        this.observers = new ArrayList<Observer>();
     }
 
     public String getId() {
@@ -119,6 +126,8 @@ public class Livro {
             }
         }
 
+        if (reservas.size() >= 2) notifyObservers();
+
         Reserva reserva = new Reserva(this, usuario);
         usuario.adicionarReserva(reserva);
         reservas.add(reserva);
@@ -131,6 +140,28 @@ public class Livro {
                 this.reservas.remove(reserva);
                 return;
             }
+        }
+    }
+
+    //Padrão observer: livro como subject
+
+    @Override
+    public void registerObserver(Observer o) {
+        observers.add(o);
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+        int i = observers.indexOf(o);
+        if (i >= 0) {
+            observers.remove(i);
+        }
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer observer : observers) {
+            observer.update();
         }
     }
 }
