@@ -5,13 +5,19 @@ import java.time.LocalDate;
 import src.usuarios.Usuario;
 
 public class Exemplar {
+    private int id;
     private Livro livro;
     private Emprestimo emprestimo = null;
     
-    Exemplar(Livro livro){
+    Exemplar(Livro livro, int id){
         this.livro = livro;
+        this.id = id;
     }
     
+    public int getId() {
+        return id;
+    }
+
     public Livro getLivro() {
         return livro;
     }

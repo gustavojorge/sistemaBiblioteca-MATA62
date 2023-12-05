@@ -10,7 +10,6 @@ public class Emprestimo {
     private Usuario usuario;
     private boolean devolvido;
     
-    
     Emprestimo(Exemplar exemplar, Usuario usuario){
         this.exemplar = exemplar;
         this.usuario = usuario;

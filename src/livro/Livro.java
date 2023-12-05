@@ -8,7 +8,7 @@ import src.observador.Subject;
 import src.usuarios.Usuario;
 
 public class Livro implements Subject {
-    private String id;
+    private int id;
     private String titulo;
     private String editora;
     private List<String> autores;
@@ -19,7 +19,7 @@ public class Livro implements Subject {
 
     private ArrayList<Observador> observers;
 
-    public Livro(String id, String titulo, String editora, List<String> autores, int anoPublicacao, int edicao) {
+    public Livro(int id, String titulo, String editora, List<String> autores, int anoPublicacao, int edicao) {
         this.id = id;
         this.titulo = titulo;
         this.editora = editora;
@@ -29,11 +29,11 @@ public class Livro implements Subject {
         this.observers = new ArrayList<Observador>();
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -75,6 +75,10 @@ public class Livro implements Subject {
         }
 
         return exemplaresLivres;
+    }
+
+    public void adicionarExemplar(int id){
+        exemplares.add(new Exemplar(this, id));
     }
 
     public Exemplar obterExemplarLivre() throws Exception{
