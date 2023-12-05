@@ -21,6 +21,10 @@ public class Exemplar {
     public Livro getLivro() {
         return livro;
     }
+
+    public Emprestimo getEmprestimo(){
+        return emprestimo;
+    }
     
     public boolean disponivel() {
         return this.emprestimo == null;

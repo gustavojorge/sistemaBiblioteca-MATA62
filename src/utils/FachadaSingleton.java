@@ -2,6 +2,7 @@ package src.utils;
 
 import java.time.LocalDate;
 import src.livro.Emprestimo;
+import src.livro.Exemplar;
 import src.livro.Livro;
 import src.livro.Reserva;
 import src.observador.Observador;
@@ -59,6 +60,32 @@ public class FachadaSingleton {
             Console.imprimirMensagem("Esse livro possui %d reservas, feitas pelos seguintes usuários:\n", livro.getQuantidadeReservas());
             for (Reserva reserva: livro.getReservas()){
                 Console.imprimirMensagem(reserva.getUsuario().getNome());
+            }
+        }
+
+        // Imprime os exemplares do livro
+        if (livro.getQuantidadeTotalExemplares() == 0){
+            Console.imprimirMensagem("Esse livro não possui exemplares");
+        } else {
+            Console.imprimirMensagem("Esse livro possui os seguintes exemplares:");
+            for (Exemplar exemplar: livro.getExemplares()){
+                Console.imprimirMensagem("Código: %d; Status: %s",
+                    exemplar.getId(),
+                    (exemplar.disponivel())?"Disponível":"Emprestado"
+                );
+
+                if (!exemplar.disponivel()){
+                    LocalDate dataEmpr = exemplar.getEmprestimo().getDataEmprestimo();
+                    LocalDate dataDev = exemplar.getEmprestimo().getDataDevolucao();
+
+                    Console.imprimirMensagem(" (Emprestado para %s no dia %s. Devolução em %s)",
+                        exemplar.getEmprestimo().getUsuario().getNome(),
+                        String.format("%02d/%02d/%04d", dataEmpr.getDayOfMonth(), dataEmpr.getMonthValue(), dataEmpr.getYear()),
+                        String.format("%02d/%02d/%04d", dataDev.getDayOfMonth(), dataDev.getMonthValue(), dataDev.getYear())
+                    );
+                }
+
+                Console.imprimirMensagem("");
             }
         }
     }

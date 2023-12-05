@@ -1,5 +1,6 @@
 package src.usuarios;
 
+import java.util.ArrayList;
 import java.util.List;
 import src.livro.Emprestimo;
 import src.livro.Livro;
@@ -9,9 +10,9 @@ public abstract class Usuario {
     protected int id;
     protected String nome;
     protected IVerificadorEmprestimo verificadorEmprestimo;
-    protected List<Emprestimo> emprestimosAtivos;
-    protected List<Emprestimo> emprestimosHistorico;
-    protected List<Reserva> reservas;
+    protected List<Emprestimo> emprestimosAtivos = new ArrayList<Emprestimo>();
+    protected List<Emprestimo> emprestimosHistorico = new ArrayList<Emprestimo>();
+    protected List<Reserva> reservas = new ArrayList<Reserva>();
     protected int limiteTempoEmprestimo;
 
     public Usuario(int id, String nome, IVerificadorEmprestimo verificadorEmprestimo) {
