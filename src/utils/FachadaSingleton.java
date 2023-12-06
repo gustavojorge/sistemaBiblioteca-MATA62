@@ -28,7 +28,10 @@ public class FachadaSingleton {
         if (usuario.getVerificadorEmprestimo().verificadorEmprestimo(usuario, livro)){
             try{
                 livro.obterExemplarLivre().emprestar(usuario);
-                Console.imprimirMensagem("Livro emprestado com sucesso!");
+                Console.imprimirMensagem("Livro com o título '%s' emprestado com sucesso ao usuário %s!",
+                        livro.getTitulo(),
+                        usuario.getNome()
+                        );
             } catch (Exception e){
                 // Esse bloco nunca será executado, pois verificadorEmprestimo retorna false se não há exemplares livres
             }
@@ -41,7 +44,10 @@ public class FachadaSingleton {
 
         try{
             livro.adicionarReserva(usuario);
-            Console.imprimirMensagem("Reserva feita com sucesso!");
+            Console.imprimirMensagem("Reserva do livro '%s' feita com sucesso ao usuário %s!",
+                    livro.getTitulo(),
+                    usuario.getNome()
+                    );
         } catch (Exception e){
             Console.imprimirMensagem("Não foi possível fazer a reserva pelo seguinte motivo: "+e.getMessage());
         }
@@ -106,7 +112,7 @@ public class FachadaSingleton {
                 e.getExemplar().getLivro().getTitulo(),
                 String.format("%02d/%02d/%04d", dataEmpr.getDayOfMonth(), dataEmpr.getMonthValue(), dataEmpr.getYear()),
                 String.format("%02d/%02d/%04d", dataDev.getDayOfMonth(), dataDev.getMonthValue(), dataDev.getYear()),
-                (e.isDevolvido())?"Devolvido":"Em curso"
+                (e.isDevolvido())?"Finalizado":"Em curso"
             );
         }
 
@@ -127,7 +133,10 @@ public class FachadaSingleton {
 
         try{
             usuario.obterEmprestimo(livro).getExemplar().devolver();
-            Console.imprimirMensagem("Livro devolvido com sucesso!\n");
+            Console.imprimirMensagem("Livro com o título '%s' devolvido com sucesso pelo usuário %s!\n",
+                    livro.getTitulo(),
+                    usuario.getNome()
+                    );
         } catch (Exception e){
             Console.imprimirMensagem(e.getMessage());
         }
@@ -136,11 +145,15 @@ public class FachadaSingleton {
     public void tornarObservador(String codigoUsuario, String codigoLivro){
         Observador observador = (Observador) bancoDeDados.obterUsuarioPorId(Integer.parseInt(codigoUsuario));
         Livro livro = bancoDeDados.obterLivroPorId(Integer.parseInt(codigoLivro));
-        
+
+        Console.imprimirMensagem("O usuário agora é um observador do livro '%s'!",
+                livro.getTitulo()
+        );
         livro.RegistrarObservador(observador);
     }
 
     public void sair(){
+        Console.imprimirMensagem("Saindo do sistema...");
         System.exit(0);
     }
 }
