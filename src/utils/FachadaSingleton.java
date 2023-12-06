@@ -112,7 +112,7 @@ public class FachadaSingleton {
                 e.getExemplar().getLivro().getTitulo(),
                 String.format("%02d/%02d/%04d", dataEmpr.getDayOfMonth(), dataEmpr.getMonthValue(), dataEmpr.getYear()),
                 String.format("%02d/%02d/%04d", dataDev.getDayOfMonth(), dataDev.getMonthValue(), dataDev.getYear()),
-                (e.isDevolvido())?"Finalizado":"Em curso"
+                (e.isDevolvido())?"Devolvido":"Em curso"
             );
         }
 
