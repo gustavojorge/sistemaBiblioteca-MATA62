@@ -29,9 +29,11 @@ public class VerificadorAluno implements IVerificadorEmprestimo {
         }
 
         if (!VerificadorReservas.usuarioEValido(usuario, livro) && livro.getQuantidadeReservas() >= livro.getQuantidadeExemplaresLivres()){
-            Console.imprimirMensagem("O usuário '%s' já possui uma reserva para este livro OU " +
-                            "a quantidade de reservas é maior do que a quantidade de exemplares livres no momento",
-                    usuario.getNome());
+            Console.imprimirMensagem("Todos os exemplares livres do livro '%s' já foram reservados, " +
+                            "mas o usuário '%s' não possui uma reserva para este livro",
+                    livro.getTitulo(),
+                    usuario.getNome()
+            );
             return false;
         }
 
