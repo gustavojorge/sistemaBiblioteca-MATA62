@@ -7,7 +7,7 @@ import src.usuarios.verificadoresEmprestimo.verificadores.*;
 import src.utils.Console;
 
 public class VerificadorProfessor implements IVerificadorEmprestimo {
-    
+
     public boolean verificadorEmprestimo(Usuario usuario, Livro livro) {
         if (livro.getQuantidadeExemplaresLivres() == 0){
             Console.imprimirMensagem("Não há exemplares livres no momento");
@@ -20,7 +20,7 @@ public class VerificadorProfessor implements IVerificadorEmprestimo {
             );
             return false;
         }
-        
+
         return true;
     }
 }
