@@ -4,7 +4,7 @@ import src.livro.Emprestimo;
 import src.livro.Livro;
 import src.usuarios.Usuario;
 
-// Verifica se o usuário já possui um exemplar do livro
+// Verifica se o usuário não possui um exemplar do livro
 public class VerificadorEmprestimoAtivoLivro {
     public static boolean usuarioEValido(Usuario usuario, Livro livro){
         for (Emprestimo emprestimo: usuario.getEmprestimosAtivos()){

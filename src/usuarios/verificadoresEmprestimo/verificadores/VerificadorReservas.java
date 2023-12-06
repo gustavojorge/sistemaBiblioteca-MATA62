@@ -9,10 +9,10 @@ public class VerificadorReservas {
     public static boolean usuarioEValido(Usuario usuario, Livro livro){
         for (Reserva reserva: livro.getReservas()){
             if (reserva.getUsuario().getId() == usuario.getId()){
-                return false;
+                return true;
             }
         }
         
-        return true;
+        return false;
     }
 }
