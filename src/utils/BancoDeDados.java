@@ -9,8 +9,7 @@ import src.usuarios.Usuario;
 import src.usuarios.tiposUsuariosCadastrados.AlunoGraduacao;
 import src.usuarios.tiposUsuariosCadastrados.AlunoPosGraduacao;
 import src.usuarios.tiposUsuariosCadastrados.Professor;
-import src.usuarios.verificadoresEmprestimo.VerificadorAluno;
-import src.usuarios.verificadoresEmprestimo.VerificadorProfessor;
+import src.usuarios.verificadoresEmprestimo.FabricaVerificadores;
 
 public class BancoDeDados {
     private HashMap<Integer, Usuario> usuarios = new HashMap<Integer, Usuario>();
@@ -23,10 +22,10 @@ public class BancoDeDados {
 
     private void criarBDTeste(){
         //Usuarios
-        usuarios.put(123, new AlunoGraduacao(123, "João da Silva", new VerificadorAluno()));
-        usuarios.put(456, new AlunoPosGraduacao(456, "Luiz Fernando Rodrigues", new VerificadorAluno()));
-        usuarios.put(789, new AlunoGraduacao(789, "Pedro Paulo", new VerificadorAluno()));
-        usuarios.put(100, new Professor(100, "Carlos Lucena", new VerificadorProfessor()));
+        usuarios.put(123, new AlunoGraduacao(123, "João da Silva", FabricaVerificadores.obterVerificadorAlunoGraduacao()));
+        usuarios.put(456, new AlunoPosGraduacao(456, "Luiz Fernando Rodrigues", FabricaVerificadores.obterVerificadorAlunoPosGraduacao()));
+        usuarios.put(789, new AlunoGraduacao(789, "Pedro Paulo", FabricaVerificadores.obterVerificadorAlunoGraduacao()));
+        usuarios.put(100, new Professor(100, "Carlos Lucena", FabricaVerificadores.obterVerificadorProfessor()));
         
         //Livros
         livros.put(100, new Livro(100, "Engenharia de Software", "AddisonWesley", arrayAutores("Ian Sommervile"), 2000, 6));
