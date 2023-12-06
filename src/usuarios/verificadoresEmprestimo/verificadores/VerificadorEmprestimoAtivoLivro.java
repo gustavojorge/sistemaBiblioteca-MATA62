@@ -3,6 +3,7 @@ package src.usuarios.verificadoresEmprestimo.verificadores;
 import src.livro.Emprestimo;
 import src.livro.Livro;
 import src.usuarios.Usuario;
+import src.utils.Console;
 
 // Verifica se o usuário não possui um exemplar do livro
 public class VerificadorEmprestimoAtivoLivro {
@@ -10,7 +11,6 @@ public class VerificadorEmprestimoAtivoLivro {
         for (Emprestimo emprestimo: usuario.getEmprestimosAtivos()){
             if (emprestimo.getExemplar().getLivro().getId() == livro.getId())
                 return false;
-
         }
         
         return true;
