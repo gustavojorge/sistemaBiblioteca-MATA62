@@ -4,7 +4,7 @@ public enum CodigosComandosEnum {
     EMPRESTIMO_CODIGO("emp"),
     RESERVA_CODIGO("res"),
     CONSULTARLIVRO_CODIGO("liv"),
-    CONSULTAROBSERVADOR_CODIGO("nft"),
+    CONSULTAROBSERVADOR_CODIGO("ntf"),
     CONSULTARUSUARIO_CODIGO("usu"),
     DEVOLVERLIVRO_CODIGO("dev"),
     OBSERVADOR_CODIGO("obs"),

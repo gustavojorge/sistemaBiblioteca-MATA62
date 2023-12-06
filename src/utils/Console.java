@@ -14,6 +14,7 @@ public class Console {
             imprimirMensagem("> ", false);
             argumentos = new CarregadorArgs(entrada.nextLine());
             sistema.executarComando(argumentos);
+            imprimirMensagem("");
         }
     }
 

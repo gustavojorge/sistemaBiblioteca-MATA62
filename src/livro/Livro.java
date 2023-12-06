@@ -109,7 +109,7 @@ public class Livro implements Subject {
         usuario.adicionarReserva(reserva);
         reservas.add(reserva);
 
-        if (reservas.size() >= 2)
+        if (reservas.size() > 2)
             notificarObservadores();
     }
 

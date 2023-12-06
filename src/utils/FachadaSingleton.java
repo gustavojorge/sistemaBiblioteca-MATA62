@@ -28,7 +28,7 @@ public class FachadaSingleton {
         if (usuario.getVerificadorEmprestimo().verificadorEmprestimo(usuario, livro)){
             try{
                 livro.obterExemplarLivre().emprestar(usuario);
-                Console.imprimirMensagem("Livro emprestado com sucesso!\n");
+                Console.imprimirMensagem("Livro emprestado com sucesso!");
             } catch (Exception e){
                 // Esse bloco nunca será executado, pois verificadorEmprestimo retorna false se não há exemplares livres
             }
@@ -41,7 +41,7 @@ public class FachadaSingleton {
 
         try{
             livro.adicionarReserva(usuario);
-            Console.imprimirMensagem("Reserva feita com sucesso!\n");
+            Console.imprimirMensagem("Reserva feita com sucesso!");
         } catch (Exception e){
             Console.imprimirMensagem("Não foi possível fazer a reserva pelo seguinte motivo: "+e.getMessage());
         }
@@ -84,7 +84,6 @@ public class FachadaSingleton {
                         String.format("%02d/%02d/%04d", dataDev.getDayOfMonth(), dataDev.getMonthValue(), dataDev.getYear())
                     );
                 }
-
                 Console.imprimirMensagem("");
             }
         }
@@ -115,7 +114,7 @@ public class FachadaSingleton {
         for (int i=usuario.getQuantidadeReservas()-1; i >= 0; i--){
             Reserva r = usuario.getReservas().get(i);
             LocalDate dataRes = r.getDataReserva();
-            Console.imprimirMensagem("Título: %s; Reserva solicitada em: %s",
+            Console.imprimirMensagem("Título: %s; Reserva solicitada em: %s\n",
                 r.getLivro().getTitulo(),
                 String.format("%02d/%02d/%04d", dataRes.getDayOfMonth(), dataRes.getMonthValue(), dataRes.getYear())
             );
