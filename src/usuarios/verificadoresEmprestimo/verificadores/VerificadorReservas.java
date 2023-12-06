@@ -3,7 +3,6 @@ package src.usuarios.verificadoresEmprestimo.verificadores;
 import src.livro.Livro;
 import src.livro.Reserva;
 import src.usuarios.Usuario;
-import src.utils.Console;
 
 // Verifica se o usuário possui reserva do livro
 public class VerificadorReservas {

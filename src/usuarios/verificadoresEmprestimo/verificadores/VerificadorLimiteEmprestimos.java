@@ -2,7 +2,6 @@ package src.usuarios.verificadoresEmprestimo.verificadores;
 
 import src.usuarios.IEmprestimosLimitados;
 import src.usuarios.Usuario;
-import src.utils.Console;
 
 // Verifica se o usuário ainda não atingiu seu limite de empréstimos
 public class VerificadorLimiteEmprestimos {
