@@ -5,9 +5,8 @@ import src.livro.Emprestimo;
 import src.livro.Exemplar;
 import src.livro.Livro;
 import src.livro.Reserva;
-import src.observador.Observador;
+import src.utils.observador.Observador;
 import src.usuarios.Usuario;
-import src.utils.Console;
 
 public class FachadaSingleton {
     private BancoDeDados bancoDeDados = BancoDeDados.obterInstanciaBancoDeDados();
@@ -24,14 +23,14 @@ public class FachadaSingleton {
     public void FazerEmprestimo(String codigoUsuario, String codigoLivro){
         Usuario usuario = bancoDeDados.obterUsuarioPorId(Integer.parseInt(codigoUsuario));
         Livro livro = bancoDeDados.obterLivroPorId(Integer.parseInt(codigoLivro));
-        
+
         if (usuario.getVerificadorEmprestimo().verificadorEmprestimo(usuario, livro)){
             try{
                 livro.obterExemplarLivre().emprestar(usuario);
                 Console.imprimirMensagem("Livro com o título '%s' emprestado com sucesso ao usuário %s!",
                         livro.getTitulo(),
                         usuario.getNome()
-                        );
+                );
             } catch (Exception e){
                 // Esse bloco nunca será executado, pois verificadorEmprestimo retorna false se não há exemplares livres
             }
@@ -47,15 +46,15 @@ public class FachadaSingleton {
             Console.imprimirMensagem("Reserva do livro '%s' feita com sucesso ao usuário %s!",
                     livro.getTitulo(),
                     usuario.getNome()
-                    );
+            );
         } catch (Exception e){
-            Console.imprimirMensagem("Não foi possível fazer a reserva pelo seguinte motivo: "+e.getMessage());
+            Console.imprimirMensagem("Não foi possível fazer a reserva: "+e.getMessage());
         }
     }
 
     public void ConsultarLivro(String codigoLivro){
         Livro livro = bancoDeDados.obterLivroPorId(Integer.parseInt(codigoLivro));
-        
+
         // Imprime o título do livro
         Console.imprimirMensagem("Título: %s\n", livro.getTitulo());
 
@@ -76,8 +75,8 @@ public class FachadaSingleton {
             Console.imprimirMensagem("Esse livro possui os seguintes exemplares:");
             for (Exemplar exemplar: livro.getExemplares()){
                 Console.imprimirMensagem("Código: %d; Status: %s",
-                    exemplar.getId(),
-                    (exemplar.disponivel())?"Disponível":"Emprestado"
+                        exemplar.getId(),
+                        (exemplar.disponivel())?"Disponível":"Emprestado"
                 );
 
                 if (!exemplar.disponivel()){
@@ -85,9 +84,9 @@ public class FachadaSingleton {
                     LocalDate dataDev = exemplar.getEmprestimo().getDataDevolucao();
 
                     Console.imprimirMensagem(" (Emprestado para %s no dia %s. Devolução em %s)",
-                        exemplar.getEmprestimo().getUsuario().getNome(),
-                        String.format("%02d/%02d/%04d", dataEmpr.getDayOfMonth(), dataEmpr.getMonthValue(), dataEmpr.getYear()),
-                        String.format("%02d/%02d/%04d", dataDev.getDayOfMonth(), dataDev.getMonthValue(), dataDev.getYear())
+                            exemplar.getEmprestimo().getUsuario().getNome(),
+                            String.format("%02d/%02d/%04d", dataEmpr.getDayOfMonth(), dataEmpr.getMonthValue(), dataEmpr.getYear()),
+                            String.format("%02d/%02d/%04d", dataDev.getDayOfMonth(), dataDev.getMonthValue(), dataDev.getYear())
                     );
                 }
                 Console.imprimirMensagem("");
@@ -103,27 +102,36 @@ public class FachadaSingleton {
     public void ConsultarUsuario(String codigoUsuario){
         Usuario usuario = bancoDeDados.obterUsuarioPorId(Integer.parseInt(codigoUsuario));
 
-        Console.imprimirMensagem("Emprestimos desse usuário:");
-        for (int i=usuario.getQuantidadeEmprestimosHistorico()-1; i >= 0; i--){
-            Emprestimo e = usuario.getEmprestimosHistorico().get(i);
-            LocalDate dataEmpr = e.getDataEmprestimo();
-            LocalDate dataDev = e.getDataDevolucao();
-            Console.imprimirMensagem("Título: %s; Emprestado em: %s; Devolução: %s; Status: %s\n",
-                e.getExemplar().getLivro().getTitulo(),
-                String.format("%02d/%02d/%04d", dataEmpr.getDayOfMonth(), dataEmpr.getMonthValue(), dataEmpr.getYear()),
-                String.format("%02d/%02d/%04d", dataDev.getDayOfMonth(), dataDev.getMonthValue(), dataDev.getYear()),
-                (e.isDevolvido())?"Devolvido":"Em curso"
-            );
+        if(usuario.getQuantidadeEmprestimosHistorico() == 0){
+            Console.imprimirMensagem("O usuário '%s' não possui empréstimos", usuario.getNome());
         }
-
-        Console.imprimirMensagem("\nReservas ativas desse usuario:");
-        for (int i=usuario.getQuantidadeReservas()-1; i >= 0; i--){
-            Reserva r = usuario.getReservas().get(i);
-            LocalDate dataRes = r.getDataReserva();
-            Console.imprimirMensagem("Título: %s; Reserva solicitada em: %s\n",
-                r.getLivro().getTitulo(),
-                String.format("%02d/%02d/%04d", dataRes.getDayOfMonth(), dataRes.getMonthValue(), dataRes.getYear())
-            );
+        else{
+            Console.imprimirMensagem("Emprestimos do usuário '%s': \n", usuario.getNome());
+            for (int i=usuario.getQuantidadeEmprestimosHistorico()-1; i >= 0; i--){
+                Emprestimo e = usuario.getEmprestimosHistorico().get(i);
+                LocalDate dataEmpr = e.getDataEmprestimo();
+                LocalDate dataDev = e.getDataDevolucao();
+                Console.imprimirMensagem("Título: %s; Emprestado em: %s; Devolução: %s; Status: %s\n",
+                        e.getExemplar().getLivro().getTitulo(),
+                        String.format("%02d/%02d/%04d", dataEmpr.getDayOfMonth(), dataEmpr.getMonthValue(), dataEmpr.getYear()),
+                        String.format("%02d/%02d/%04d", dataDev.getDayOfMonth(), dataDev.getMonthValue(), dataDev.getYear()),
+                        (e.isDevolvido())?"Devolvido":"Em curso"
+                );
+            }
+        }
+        if(usuario.getQuantidadeReservas() == 0){
+            Console.imprimirMensagem("\nO usuário '%s' não possui reservas", usuario.getNome());
+        }
+        else{
+            Console.imprimirMensagem("\nReservas ativas do usuario '%s':\n", usuario.getNome());
+            for (int i=usuario.getQuantidadeReservas()-1; i >= 0; i--){
+                Reserva r = usuario.getReservas().get(i);
+                LocalDate dataRes = r.getDataReserva();
+                Console.imprimirMensagem("Título: %s; Reserva solicitada em: %s\n",
+                        r.getLivro().getTitulo(),
+                        String.format("%02d/%02d/%04d", dataRes.getDayOfMonth(), dataRes.getMonthValue(), dataRes.getYear())
+                );
+            }
         }
     }
 
@@ -136,7 +144,7 @@ public class FachadaSingleton {
             Console.imprimirMensagem("Livro com o título '%s' devolvido com sucesso pelo usuário %s!\n",
                     livro.getTitulo(),
                     usuario.getNome()
-                    );
+            );
         } catch (Exception e){
             Console.imprimirMensagem(e.getMessage());
         }

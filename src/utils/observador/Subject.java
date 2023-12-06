@@ -1,4 +1,4 @@
-package src.observador;
+package src.utils.observador;
 
 public interface Subject {
     public void RegistrarObservador(Observador observador);

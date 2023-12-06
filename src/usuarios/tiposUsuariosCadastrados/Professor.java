@@ -2,7 +2,7 @@ package src.usuarios.tiposUsuariosCadastrados;
 
 import src.usuarios.Usuario;
 import src.usuarios.verificadoresEmprestimo.regras.TempoEmprestimo;
-import src.observador.Observador;
+import src.utils.observador.Observador;
 import src.usuarios.IVerificadorEmprestimo;
 
 public class Professor extends Usuario implements Observador{

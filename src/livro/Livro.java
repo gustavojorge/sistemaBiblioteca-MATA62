@@ -3,8 +3,8 @@ package src.livro;
 import java.util.ArrayList;
 import java.util.List;
 
-import src.observador.Observador;
-import src.observador.Subject;
+import src.utils.observador.Observador;
+import src.utils.observador.Subject;
 import src.usuarios.Usuario;
 
 public class Livro implements Subject {
