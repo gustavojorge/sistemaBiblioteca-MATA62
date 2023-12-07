@@ -3,9 +3,9 @@ package src.livro;
 import java.util.ArrayList;
 import java.util.List;
 
-import src.utils.observador.Observador;
-import src.utils.observador.Subject;
 import src.usuarios.Usuario;
+import src.usuarios.observador.Observador;
+import src.usuarios.observador.Subject;
 
 public class Livro implements Subject {
     private int id;

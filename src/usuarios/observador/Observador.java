@@ -1,4 +1,4 @@
-package src.utils.observador;
+package src.usuarios.observador;
 
 public interface Observador {
     public void atualizar();

@@ -1,7 +1,7 @@
-package src.utils;
+package src.sistema;
 
 import java.util.Scanner;
-import src.utils.entradaUsuario.CarregadorArgs;
+import src.sistema.entradaUsuario.CarregadorArgs;
 
 public class Console {
     private ExecutarSistema sistema = new ExecutarSistema();

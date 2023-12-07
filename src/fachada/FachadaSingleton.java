@@ -1,12 +1,14 @@
-package src.utils;
+package src.fachada;
 
 import java.time.LocalDate;
 import src.livro.Emprestimo;
 import src.livro.Exemplar;
 import src.livro.Livro;
 import src.livro.Reserva;
-import src.utils.observador.Observador;
+import src.sistema.BancoDeDados;
+import src.sistema.Console;
 import src.usuarios.Usuario;
+import src.usuarios.observador.Observador;
 
 public class FachadaSingleton {
     private BancoDeDados bancoDeDados = BancoDeDados.obterInstanciaBancoDeDados();
@@ -27,7 +29,7 @@ public class FachadaSingleton {
         if (usuario.getVerificadorEmprestimo().verificadorEmprestimo(usuario, livro)){
             try{
                 livro.obterExemplarLivre().emprestar(usuario);
-                Console.imprimirMensagem("Livro com o título '%s' emprestado com sucesso ao usuário %s!",
+                Console.imprimirMensagem("Livro com o título '%s' emprestado com sucesso ao usuário '%s'!",
                         livro.getTitulo(),
                         usuario.getNome()
                 );
@@ -43,7 +45,7 @@ public class FachadaSingleton {
 
         try{
             livro.adicionarReserva(usuario);
-            Console.imprimirMensagem("Reserva do livro '%s' feita com sucesso ao usuário %s!",
+            Console.imprimirMensagem("Reserva do livro '%s' feita com sucesso ao usuário '%s'!",
                     livro.getTitulo(),
                     usuario.getNome()
             );
@@ -83,7 +85,7 @@ public class FachadaSingleton {
                     LocalDate dataEmpr = exemplar.getEmprestimo().getDataEmprestimo();
                     LocalDate dataDev = exemplar.getEmprestimo().getDataDevolucao();
 
-                    Console.imprimirMensagem(" (Emprestado para %s no dia %s. Devolução em %s)",
+                    Console.imprimirMensagem(" (Emprestado para '%s' no dia %s. Devolução em %s)",
                             exemplar.getEmprestimo().getUsuario().getNome(),
                             String.format("%02d/%02d/%04d", dataEmpr.getDayOfMonth(), dataEmpr.getMonthValue(), dataEmpr.getYear()),
                             String.format("%02d/%02d/%04d", dataDev.getDayOfMonth(), dataDev.getMonthValue(), dataDev.getYear())

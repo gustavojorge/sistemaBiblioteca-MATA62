@@ -1,8 +1,8 @@
 package src.comandos.comandosCadastrados;
 
-import src.utils.FachadaSingleton;
 import src.comandos.IComando;
-import src.utils.entradaUsuario.CarregadorArgs;
+import src.fachada.FachadaSingleton;
+import src.sistema.entradaUsuario.CarregadorArgs;
 
 public class ExitComando implements IComando {
     public void executar(CarregadorArgs args) {

@@ -1,6 +1,6 @@
 package src;
 
-import src.utils.Console;
+import src.sistema.Console;
 
 public class App{
     public static void main(String[] args) {

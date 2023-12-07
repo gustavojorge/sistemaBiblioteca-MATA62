@@ -1,10 +1,10 @@
 package src.usuarios.verificadoresEmprestimo;
 
 import src.livro.Livro;
+import src.sistema.Console;
 import src.usuarios.IVerificadorEmprestimo;
 import src.usuarios.Usuario;
 import src.usuarios.verificadoresEmprestimo.verificadores.*;
-import src.utils.Console;
 
 public class VerificadorAluno implements IVerificadorEmprestimo {
 
