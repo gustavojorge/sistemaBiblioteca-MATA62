@@ -48,7 +48,7 @@ public class FachadaSingleton {
                     usuario.getNome()
             );
         } catch (Exception e){
-            Console.imprimirMensagem("Não foi possível fazer a reserva: "+e.getMessage());
+            Console.imprimirMensagem(e.getMessage());
         }
     }
 
@@ -140,7 +140,7 @@ public class FachadaSingleton {
         Livro livro = bancoDeDados.obterLivroPorId(Integer.parseInt(codigoLivro));
 
         try{
-            usuario.obterEmprestimo(livro).getExemplar().devolver();
+            usuario.obterEmprestimoAtivo(livro).getExemplar().devolver();
             Console.imprimirMensagem("Livro com o título '%s' devolvido com sucesso pelo usuário %s!\n",
                     livro.getTitulo(),
                     usuario.getNome()

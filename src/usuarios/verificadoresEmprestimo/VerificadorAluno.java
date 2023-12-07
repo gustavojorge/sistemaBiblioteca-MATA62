@@ -10,20 +10,25 @@ public class VerificadorAluno implements IVerificadorEmprestimo {
 
     public boolean verificadorEmprestimo(Usuario usuario, Livro livro) {
         if (livro.getQuantidadeExemplaresLivres() == 0) {
-            Console.imprimirMensagem("Não há exemplares livres no momento");
+            Console.imprimirMensagem("O usuário '%s' não pode pegar o livro '%s' porque não há exemplares livres no momento",
+                usuario.getNome(),
+                livro.getTitulo()
+            );
             return false;
         }
 
         if (!VerificadorAtraso.usuarioEValido(usuario)){
-            Console.imprimirMensagem("O usuário '%s' está em débito com a biblioteca",
-                    usuario.getNome()
+            Console.imprimirMensagem("O usuário '%s' não pode pegar o livro '%s' porque está em débito com a biblioteca",
+                    usuario.getNome(),
+                    livro.getTitulo()
             );
             return false;
         }
 
         if (!VerificadorLimiteEmprestimos.usuarioEValido(usuario)) {
-            Console.imprimirMensagem("O usuário '%s' atingiu o seu limite de empréstimos ativos!",
-                    usuario.getNome()
+            Console.imprimirMensagem("O usuário '%s' não pode pegar o livro '%s' porque atingiu o seu limite de empréstimos ativos!",
+                    usuario.getNome(),
+                    livro.getTitulo()
             );
             return false;
         }
@@ -38,7 +43,7 @@ public class VerificadorAluno implements IVerificadorEmprestimo {
         }
 
         if (!VerificadorEmprestimoAtivoLivro.usuarioEValido(usuario, livro)){
-            Console.imprimirMensagem("O usuário '%s' já possui um exemplar do livro '%s' com empréstimo ativo",
+            Console.imprimirMensagem("O usuário '%s' já possui um empréstimo ativo do livro '%s'",
                     usuario.getNome(),
                     livro.getTitulo()
             );

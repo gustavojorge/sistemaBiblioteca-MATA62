@@ -45,14 +45,18 @@ public abstract class Usuario {
         return this.reservas;
     }
 
-    public Emprestimo obterEmprestimo(Livro livro) throws Exception{
+    public Emprestimo obterEmprestimoAtivo(Livro livro) throws Exception{
         for (Emprestimo emprestimo: emprestimosAtivos){
             if (emprestimo.getExemplar().getLivro() == livro){
                 return emprestimo;
             }
         }
 
-        throw new Exception("O usuário não possui empréstimo desse livro!");
+        throw new Exception(String.format(
+            "O usuário '%s' não possui empréstimo ativo do livro '%s'",
+            this.nome,
+            livro.getTitulo()
+        ));
     }
 
     public int getQuantidadeEmprestimosAtivos(){
@@ -82,7 +86,11 @@ public abstract class Usuario {
 
     public void adicionarReserva(Reserva reserva) throws Exception{
         if (this.reservas.size() == 3)
-            throw new Exception("Usuário já atingiu a quantidade máxima de reservas!");
+            throw new Exception(String.format(
+                "O usuário '%s' não pode reservar o livro '%s' pois já atingiu seu limite de reservas",
+                this.nome,
+                reserva.getLivro().getTitulo()
+            ));
 
         this.reservas.add(reserva);
     }

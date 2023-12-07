@@ -100,7 +100,11 @@ public class Livro implements Subject {
     public void adicionarReserva(Usuario usuario) throws Exception{
         for (Reserva reserva: this.reservas){
             if (reserva.getUsuario().getId() == usuario.getId()){
-                throw new Exception("Usuário já reservou este livro!");
+                throw new Exception(String.format(
+                    "O usuário '%s' não pode reservar o livro '%s' pois já possui uma reserva para o mesmo",
+                    usuario.getId(),
+                    this.titulo
+                ));
             }
         }
 
